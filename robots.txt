@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://apair.github.io/maple-prep-legal/sitemap.xml
