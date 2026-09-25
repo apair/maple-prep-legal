@@ -26,16 +26,21 @@ describe('MaplePrep public information site', () => {
 
   it('publishes the required privacy disclosures and contact route', () => {
     const privacy = read('privacy/index.html');
-    for (const phrase of ['Information processed by the app', 'Storage, retention, and deletion', 'Service providers', 'does not sell personal information']) {
+    for (const phrase of ['Information processed by the app', 'Storage, retention, and deletion', 'Service providers', 'rewarded advertisement', 'does not sell personal information']) {
       assert.match(privacy, new RegExp(phrase, 'i'));
     }
   });
 
-  it('publishes subscription terms and the government-independence disclaimer', () => {
+  it('publishes energy and one-time purchase terms plus the government-independence disclaimer', () => {
     const terms = read('terms/index.html');
-    for (const phrase of ['MaplePrep Pro', 'renews automatically', 'Restore purchases', 'not affiliated with, endorsed by, or operated by']) {
+    for (const phrase of ['MaplePrep Pro', '30 practice energy', 'one-time, non-renewing purchase', 'Restore purchases', 'not affiliated with, endorsed by, or operated by']) {
       assert.match(terms, new RegExp(phrase, 'i'));
     }
+  });
+
+  it('contains no obsolete generative AI or recurring-subscription claims', () => {
+    const site = ['index.html', 'privacy/index.html', 'terms/index.html'].map(read).join('\n');
+    assert.doesNotMatch(site, /AI Tutor|OpenAI|renews automatically|weekly subscription|monthly subscription/i);
   });
 
   it('does not expose private application source or developer placeholders', () => {
