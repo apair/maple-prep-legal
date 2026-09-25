@@ -40,7 +40,7 @@ describe('MaplePrep public information site', () => {
 
   it('contains no obsolete generative AI or recurring-subscription claims', () => {
     const site = ['index.html', 'privacy/index.html', 'terms/index.html'].map(read).join('\n');
-    assert.doesNotMatch(site, /AI Tutor|OpenAI|renews automatically|weekly subscription|monthly subscription/i);
+    assert.doesNotMatch(site, /AI Tutor|Tutor content|OpenAI|renews automatically|weekly subscription|monthly subscription/i);
   });
 
   it('does not expose private application source or developer placeholders', () => {
